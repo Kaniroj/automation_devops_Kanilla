@@ -27,6 +27,7 @@ jobs:
       run: echo $Greeting1
   
   greeting_two:
+    needs: greeting_one
     runs-on: ubuntu-latest
     steps:
       - name: Hello no 2 with secret
