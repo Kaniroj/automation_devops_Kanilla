@@ -36,4 +36,4 @@ jobs:
       - name: Checkout repository code # Best practice: always checkout first
         uses: actions/checkout@v4      # This step checks out the code.
       - name: Hello no 2 with secret
-        run: echo {{ $env.Greeting2 }} and ${{ secrets.DAY1_EXERCSISE_SECRET }}
+        run: echo $Greeting2 and ${{ secrets.DAY1_EXERCSISE_SECRET }}
