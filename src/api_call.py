@@ -35,7 +35,7 @@ def get_current_weather(lat, lon):
         "lat": lat,
         "lon": lon,
         "appid": API_KEY,
-        "units": "imperial" 
+        "units": "metric"
     }
     response = requests.get(weather_url, params=params)
     response.raise_for_status()
