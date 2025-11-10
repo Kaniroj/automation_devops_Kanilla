@@ -85,6 +85,9 @@ if __name__ == "__main__":
     
 
 
+
+if __name__ == "__main__":
+    city, today, temp, feels_like, clouds, precipitation = fetch_weather()
     print(f"Weather in {city} on {today}:")
     print(f"Temperature: {temp}°F, Feels like: {feels_like}°F,")
     print(f"Conditions: {clouds},")
