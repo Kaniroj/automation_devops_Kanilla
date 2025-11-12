@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ دریافت سورس کد
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2️⃣ بررسی محل فعلی و محتویات
       - name: Show working directory and files
         run: |
           echo "Current path:"
@@ -21,17 +23,21 @@ jobs:
           echo "List of files:"
           ls -R
 
+      # 3️⃣ ورود به Docker Hub
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
+      # 4️⃣ ساخت Docker image از ریشه‌ی پروژه
       - name: Build Docker image
         run: |
-          echo "Building Docker image from project root..."
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/dashboord:latest -f Dockerfile .
+          echo "Building Docker image from current directory..."
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/dashboord:latest -f ./Dockerfile .
 
+      # 5️⃣ ارسال image به Docker Hub
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/dashboord:latest
 
+      # 6️⃣ دیپلوی روی Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
