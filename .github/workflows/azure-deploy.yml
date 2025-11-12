@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ دریافت سورس کد
+      # 1️⃣ دریافت سورس کد از مخزن
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ بررسی محل فعلی و محتویات
+      # 2️⃣ نمایش مسیر فعلی و محتویات (برای دیباگ)
       - name: Show working directory and files
         run: |
           echo "Current path:"
@@ -27,13 +27,15 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # 4️⃣ ساخت Docker image از ریشه‌ی پروژه
+      # 4️⃣ ساخت Docker image از ریشه پروژه
       - name: Build Docker image
         run: |
-          echo "Building Docker image from current directory..."
+          echo "Navigating to project root..."
+          cd $GITHUB_WORKSPACE
+          echo "Building Docker image from project root..."
           docker build -t ${{ secrets.DOCKER_USERNAME }}/dashboord:latest -f ./Dockerfile .
 
-      # 5️⃣ ارسال image به Docker Hub
+      # 5️⃣ ارسال Docker image به Docker Hub
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/dashboord:latest
 
