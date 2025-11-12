@@ -70,8 +70,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "🔧 Building Docker image..."
-          docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/flask_app:latest -f Dockerfile .
+         echo "🔧 Building Docker image..."
+         docker buildx build --platform linux/amd64 \
+         -t ${{ secrets.DOCKER_USERNAME }}/flask_app:latest \
+         -f ./Dockerfile \
+         . --load
+
 
       - name: Push Docker image to DockerHub
         run: |
