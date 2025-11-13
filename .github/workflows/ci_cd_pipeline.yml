@@ -33,6 +33,9 @@ jobs:
         env:
           open_api_key: ${{ secrets.API_KEY }}
         run: pytest --maxfail=1 --disable-warnings -q
+      - name: Debug Docker username
+        run: |
+          echo "USERNAME='${{ secrets.DOCKER_USERNAME }}'"
 
 
   build_and_push:   # ✔ درست شد: هم‌تراز با test
