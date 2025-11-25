@@ -35,8 +35,7 @@ jobs:
         run: pytest --maxfail=1 --disable-warnings -q
 
       # ------------------------------------------------------
-      # Error logging – körs bara om tester misslyckas OCH
-      # create_log = true i workflow_dispatch
+      # Error logging – bara om tester misslyckas och create_log = true
       # ------------------------------------------------------
       - name: Generate error log
         if: failure() && github.event.inputs.create_log == 'true'
@@ -54,16 +53,11 @@ jobs:
           name: error-log
           path: error_log.txt
 
+      # ------------------------------------------------------
       - name: Print Docker username (for debugging)
-<<<<<<< HEAD
         run: |
-          echo Docker username:
-          echo ${{ secrets.DOCKER_USERNAME }}
-
-=======
-        run: echo "Docker username:${{secrets.DOCKER_USERNAME }}
->>>>>>> 3b585cf31bf99ea035a48315f08383c4d2836d6b
-
+          echo "Docker username:"
+          echo "${{ secrets.DOCKER_USERNAME }}"
 
   build_and_push:
     runs-on: ubuntu-latest
