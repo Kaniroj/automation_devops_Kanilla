@@ -12,6 +12,5 @@ def test_current_weather_has_main_and_temp():
     data = get_current_weather(lat, lon)
     assert "main" in data and "temp" in data["main"]
 
-def test_force_fail():
-    assert False
+
     
