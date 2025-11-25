@@ -55,7 +55,7 @@ jobs:
           path: error_log.txt
 
       - name: Print Docker username (for debugging)
-        run: echo "Docker username: ${{ secrets.DOCKER_USERNAME }}"
+        run: echo "Docker username:${{secrets.DOCKER_USERNAME }}
 
 
   build_and_push:
